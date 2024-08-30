@@ -15,12 +15,14 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id('review_id');
-            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('product_id')->nullable()->constrained('products', 'product_id')->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained('users', 'id')->onDelete('set null');
             $table->tinyInteger('rating')->unsigned()->check('rating BETWEEN 1 AND 5');
             $table->text('comment')->nullable();
             $table->timestamp('review_date')->useCurrent();
         });
+
+   
     }
 
     /**
