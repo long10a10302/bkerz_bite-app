@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
@@ -26,10 +25,11 @@
                     <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>
                 @endif
             </div>
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-between mb-4">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Login
                 </button>
+                <a href="" class="text-sm text-blue-500 hover:underline">Forgot Password?</a>
             </div>
         </form>
     </div>

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
 
 
 class UserController extends Controller
@@ -56,6 +55,14 @@ class UserController extends Controller
         ]);
 
         // Chuyển hướng sau khi đăng ký thành công
-        return redirect()->with('success', 'Registration successful!');
+        return redirect()->route('user.login')->with('success', 'Registration successful!');
+    }
+
+    public function login(){
+        return view('users.login');
+    }
+
+    public function signin(Request $request){
+        
     }
 }
