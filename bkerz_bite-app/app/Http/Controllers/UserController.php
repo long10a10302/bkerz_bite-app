@@ -63,6 +63,47 @@ class UserController extends Controller
     }
 
     public function signin(Request $request){
+        $rules = [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ];
+
+        $messages = [
+            'email.required' => 'Email is required',
+            'email.email' => 'Email must be a valid email address',
+            'password.required' => 'Password is required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            // Nếu xác thực thành công, tái sinh phiên người dùng
+            $request->session()->regenerate();
+        
+            // Lấy người dùng hiện tại
+            $user = Auth::user();
+        
+            // Lưu ID người dùng vào phiên
+            $request->session()->put('user_id', $user->id);
+        
+            // Điều hướng dựa trên vai trò của người dùng
+            if ($user->role == 'admin') {
+                return redirect()->route('admin')->with('logined', 'Đăng nhập thành công');
+            }
+            
+            return redirect()->route('home')->with('logined', 'Đăng nhập thành công');
+        } else {
+            // Nếu xác thực thất bại, quay lại với lỗi và dữ liệu nhập
+            return redirect()->back()
+                ->withErrors(['email' => 'Invalid credentials'])
+                ->withInput();
+        }
         
     }
 }

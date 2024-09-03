@@ -13,7 +13,7 @@
         </div>
         <nav class="mt-4 flex-1">
             <a href="#" class="block py-2.5 px-4 hover:bg-blue-700">Dashboard</a>
-            <a href="{{ route('admin.post') }}" class="block py-2.5 px-4 hover:bg-blue-700">Posts</a>
+            <a href="" class="block py-2.5 px-4 hover:bg-blue-700">Posts</a>
         </nav>
         <div class="p-4">
             <a href="{{ route('user.logout') }}"class="w-full bg-blue-700 py-2 px-4 rounded hover:bg-blue-600">Logout</a>
