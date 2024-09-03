@@ -17,4 +17,4 @@ Route::get('users/logout',[UserController::class,"logout"])->name("user.logout")
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/category/{id}', [ProductController::class, 'showCategory'])->name('category.show');
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
