@@ -15,11 +15,12 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Tạo cột khóa chính với tên là `id`
-            $table->string('name');
+            $table->string('full_name');
             $table->string('email')->unique();
-            $table->string('role');
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_number');
             $table->rememberToken();
             $table->timestamps();
         });
