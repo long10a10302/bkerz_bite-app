@@ -22,19 +22,21 @@
             <table class="min-w-full bg-white rounded-lg shadow">
                 <thead class="bg-blue-800 text-white">
                     <tr>
+                        <th class="py-2 px-4 text-left">Tên bánh</th>
+                        <th class="py-2 px-4 text-left">Miêu tả bánh</th>
                         <th class="py-2 px-4 text-left">Tên danh mục bánh</th>
-                        <th class="py-2 px-4 text-left">Miêu tả danh mục bánh</th>
                         <th class="py-2 px-4 text-left">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($cakes as $cake)
                     <tr class="border-b">
-                        <td class="py-2 px-4">{{ $cake->cake_name }}</td>
+                        <td class="py-2 px-4">{{ $cake->name }}</td>
                         <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $cake->description }}</td>
+                        <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $cake->category->category_name}}</td>
                         <td class="py-2 px-4 flex space-x-2">
-                            <a href="{{ route('admin.cake.edit', $cake->cake_id) }}" class="text-blue-500 hover:text-blue-700">Sửa</a>
-                            <form action="{{ route('admin.cake.delete', $cake->cake_id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                            <a href="{{ route('admin.cake.edit',$cake->product_id)}}" class="text-blue-500 hover:text-blue-700">Sửa</a>
+                            <form action="{{ route('admin.cake.delete', $cake->product_id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>

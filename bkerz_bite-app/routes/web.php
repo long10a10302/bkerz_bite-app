@@ -36,7 +36,7 @@ Route::get('admin/cake/add',[AdminController::class,'addCake'])->name('admin.cak
 Route::post('admin/cake/create',[AdminController::class,'createCake'])->name('admin.cake.create');
 Route::get('admin/cake/edit/{id}',[AdminController::class,'editCake'])->name('admin.cake.edit');
 Route::put('admin/cake/update/{id}',[AdminController::class,'updateCake'])->name('admin.cake.update');
-Route::delete('/admin/cake/delete/{id}', [AdminController::class, 'destroyCake'])->name('admin.category.delete');
+Route::delete('/admin/cake/delete/{id}', [AdminController::class, 'destroyCake'])->name('admin.cake.delete');
 
 });
 
