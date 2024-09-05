@@ -8,8 +8,9 @@
 <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
         <h2 class="text-2xl font-bold mb-4">Create Category</h2>
-        <form action="{{ route('admin.category.create') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.category.update',$category->category_id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="mb-4">
                 <label for="category_name" class="block text-gray-700 text-sm font-bold mb-2">Category Name</label>
                 <input type="text" id="category_name" name="category_name" class="form-input w-full" value="{{$category->category_name}}">
@@ -25,10 +26,8 @@
                 <label for="img_url" class="block text-gray-700 text-sm font-bold mb-2">Img</label>
                 <input type="file" id="img_url" name="img_url" class="form-input w-full">
             </div>
-
             <div class="flex justify-end space-x-4">
-                <button type="button" id="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Category</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Update Category</button>
             </div>
         </form>
     </div>

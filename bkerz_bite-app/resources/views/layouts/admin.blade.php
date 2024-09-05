@@ -22,7 +22,7 @@
     </div>
     <div class="flex-1 p-6">
         @yield('content')
-        @yield('scripts')
+      
     </div>
   
 </body>

@@ -25,9 +25,18 @@ Route::middleware(['admin'])->group(function () {
 Route::get("admin",[AdminController::class,"index"])->name("admin");
 Route::get('admin/cake',[AdminController::class,'cake'])->name('admin.cake');
 Route::get('admin/category',[AdminController::class,'category'])->name('admin.category');
-Route::get('admin/category/add',[AdminController::class,'addCat'])->name('add');
+
+Route::get('admin/category/add',[AdminController::class,'addCat'])->name('admin.category.add');
 Route::post('admin/category/create',[AdminController::class,'createCat'])->name('admin.category.create');
 Route::get('admin/category/edit/{id}',[AdminController::class,'editCat'])->name('admin.category.edit');
+Route::put('admin/category/update/{id}',[AdminController::class,'updateCat'])->name('admin.category.update');
+Route::delete('/admin/category/delete/{id}', [AdminController::class, 'destroyCat'])->name('admin.category.delete');
+
+Route::get('admin/cake/add',[AdminController::class,'addCake'])->name('admin.cake.add');
+Route::post('admin/cake/create',[AdminController::class,'createCake'])->name('admin.cake.create');
+Route::get('admin/cake/edit/{id}',[AdminController::class,'editCake'])->name('admin.cake.edit');
+Route::put('admin/cake/update/{id}',[AdminController::class,'updateCake'])->name('admin.cake.update');
+Route::delete('/admin/cake/delete/{id}', [AdminController::class, 'destroyCake'])->name('admin.category.delete');
 
 });
 
