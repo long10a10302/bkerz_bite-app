@@ -33,9 +33,11 @@
                     <tr class="border-b">
                         <td class="py-2 px-4">{{ $cake->name }}</td>
                         <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $cake->description }}</td>
-                        <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $cake->category->category_name}}</td>
+                        <td class="py-2 px-4 overflow-hidden line-clamp-1">
+                            {{ $cake->category ? $cake->category->category_name : 'No Category' }}
+                        </td>
                         <td class="py-2 px-4 flex space-x-2">
-                            <a href="{{ route('admin.cake.edit',$cake->product_id)}}" class="text-blue-500 hover:text-blue-700">Sửa</a>
+                            <a href="{{ route('admin.cake.edit', $cake->product_id) }}" class="text-blue-500 hover:text-blue-700">Sửa</a>
                             <form action="{{ route('admin.cake.delete', $cake->product_id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                 @csrf
                                 @method('DELETE')

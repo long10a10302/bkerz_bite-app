@@ -40,9 +40,9 @@
             <div class="mb-4">
                 <label for="category_id" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
                 <select id="category_id" name="category_id" class="form-select w-full" required>
-                    <option value="">Select Catgory</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category -> category_id }}">{{ $category->category_name }}</option>
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                    <option value="{{$category -> category_id}}">{{$category->category_name}}</option>
                     @endforeach
                 </select>
                 @error('category_id')

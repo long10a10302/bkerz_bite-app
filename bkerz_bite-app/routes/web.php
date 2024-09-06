@@ -38,6 +38,8 @@ Route::get('admin/cake/edit/{id}',[AdminController::class,'editCake'])->name('ad
 Route::put('admin/cake/update/{id}',[AdminController::class,'updateCake'])->name('admin.cake.update');
 Route::delete('/admin/cake/delete/{id}', [AdminController::class, 'destroyCake'])->name('admin.cake.delete');
 
+Route::get('admins/review',[AdminController::class,'review'])->name('admin.review');
+
 });
 
 

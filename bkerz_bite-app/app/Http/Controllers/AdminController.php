@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\Category;
-
+use App\Models\Review;
 class AdminController extends Controller
 {
     //
     public function index()
     {
-
         return view('admins.index');
     }
+    //-----------------------------------------------------------------------------------------------
 
     public function category()
     {
@@ -120,23 +120,29 @@ class AdminController extends Controller
     public function destroyCat($id)
     {
         $category = Category::find($id);
+        $filename = $category->img_url;
+        $imagePath = public_path('images/' . $filename);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
         $category->delete(); // Delete the category
 
         return redirect()->route('admin.category')->with('success', 'Category deleted successfully.');
     }
-
+    //---------------------------------------------------------------------------------------------------------------
     public function cake()
     {
-        $cakes = Product::with('category')->get();
+        $cakes = Product::with('category')->whereNotNull('category_id')->get();
         return view('admins.cake', compact('cakes'));
     }
 
 
     public function addCake()
     {
-        $categories = Product::with('categories')->get();
+        $categories = Category::all();
         return view('admins.cake_create', compact('categories'));
     }
+
 
     public function createCake(Request $request)
     {
@@ -144,6 +150,7 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
             'price' => 'required|numeric|min:0',
+            'category_id' => 'required',
             'img_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
@@ -156,6 +163,7 @@ class AdminController extends Controller
             'price.required' => 'Price is required',
             'price.numeric' => 'Price must be a number',
             'price.min' => 'Price must be at least 0',
+            'category_id' => 'Category_id must be required',
             'img_url.image' => 'Uploaded file must be an image',
             'img_url.mimes' => 'Image must be a file of type: jpeg, png, jpg, gif',
             'img_url.max' => 'Image size may not be greater than 2MB',
@@ -172,7 +180,7 @@ class AdminController extends Controller
         $cake->name = $request->name;
         $cake->description = $request->description;
         $cake->price = $request->price;
-        $cake->category_id = $request->input('category_id');
+        $cake->category_id = $request->category_id;
         // Handle image upload
         if ($request->hasFile('img_url')) {
             $file = $request->file('img_url');
@@ -196,7 +204,8 @@ class AdminController extends Controller
         return view('admins.cake_edit', compact('cake', 'categories'));
     }
 
-    public function updateCake(Request $request,$id){
+    public function updateCake(Request $request, $id)
+    {
         $rules = [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
@@ -230,7 +239,7 @@ class AdminController extends Controller
         $cake->description = $request->description;
         $cake->price = $request->price;
         $cake->category_id = $request->input('category_id');
-        
+
         if ($request->hasFile('img_url')) {
             $filename = $cake->image_url;
             $imagePath = public_path('images/' . $filename);
@@ -248,9 +257,21 @@ class AdminController extends Controller
         return redirect()->route('admin.cake')->with('success', 'Cake added successfully.');
     }
 
-    public function destroyCake($id){
+    public function destroyCake($id)
+    {
         $cake = Product::find($id);
+        $filename = $cake->image_url;
+        $imagePath = public_path('images/' . $filename);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
         $cake->delete();
         return redirect()->route('admin.cake')->with('success', 'Cake added successfully.');
+    }
+    //----------------------------------------------------------------------------------------------------------
+    public function review()
+    {
+        $reviews = Review::with(['user', 'product'])->get();
+        return view('admins.review',compact('reviews'));
     }
 }

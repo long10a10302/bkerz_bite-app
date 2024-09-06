@@ -15,6 +15,8 @@
             <a href="{{ route('admin') }}" class="block py-2.5 px-4 hover:bg-blue-700">Dashboard</a>
             <a href="{{ route('admin.category') }}" class="block py-2.5 px-4 hover:bg-blue-700">Category</a>
             <a href="{{ route('admin.cake') }}" class="block py-2.5 px-4 hover:bg-blue-700">Cakes</a>
+            <a href="{{ route('admin.review') }}" class="block py-2.5 px-4 hover:bg-blue-700">Review</a>
+
         </nav>
         <div class="p-4">
             <a href="{{ route('user.logout') }}" class="w-full bg-blue-700 py-2 px-4 rounded hover:bg-blue-600">Logout</a>
