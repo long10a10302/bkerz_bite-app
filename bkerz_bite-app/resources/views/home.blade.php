@@ -1,82 +1,71 @@
-<!doctype html>
-<html>
+@extends('layouts.app')
 
-<head>
-    {{-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" /> --}}
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-</head>
-
-<body>
+@section('content')
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
-    @include('layouts.header')
-    <div>
 
-        <div id="gallery" class="relative w-screen" data-carousel="slide" data-carousel-interval="3000">
-            <!-- Carousel wrapper -->
-            <!-- Increase height here -->
-            <div class="relative h-[400px] md:h-[600px] overflow-hidden bg-[#EBE1CB]">
-                <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/images/Bread-slide-1853.jpg" class="absolute inset-0 w-full h-full object-cover"
-                        alt="Bread slide">
-                </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="/images/caramello-slice-e1632865980223.jpg"
-                        class="absolute inset-0 w-full h-full object-cover" alt="Caramello slice">
-                </div>
-                <!-- Item 3 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/images/croissants.jpg" class="absolute inset-0 w-full h-full object-cover"
-                        alt="Croissants">
-                </div>
-                <!-- Item 4 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/images/gallery_template_cookies_3.jpg"
-                        class="absolute inset-0 w-full h-full object-cover" alt="Cookies">
-                </div>
-                <!-- Item 5 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/images/pastry-0491.jpg" class="absolute inset-0 w-full h-full object-cover"
-                        alt="Pastry">
-                </div>
+    <!-- Carousel Section -->
+    <div class="relative w-full h-[700px] overflow-hidden">
+        <div id="carousel" class="relative w-full h-full" data-carousel="slide">
+            <!-- Carousel Wrapper -->
+            <div class="flex transition-transform duration-700 ease-in-out">
+                <!-- Carousel Items -->
+                @foreach ([
+            'Bread-slide-1853.jpg' => 'Bread slide',
+            'caramello-slice-e1632865980223.jpg' => 'Caramello slice',
+            'croissants.jpg' => 'Croissants',
+            'gallery_template_cookies_3.jpg' => 'Cookies',
+            'pastry-0491.jpg' => 'Pastry',
+        ] as $image => $alt)
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item="{{ $loop->first ? 'active' : '' }}">
+                        <img src="/images/{{ $image }}" alt="{{ $alt }}" class="w-full h-auto block">
+                    </div>
+                @endforeach
             </div>
-
-            <!-- Slider controls -->
-            <button type="button"
-                class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-prev>
-                <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 1 1 5l4 4" />
-                    </svg>
-                    <span class="sr-only">Previous</span>
-                </span>
-            </button>
-            <button type="button"
-                class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-next>
-                <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 9 4-4-4-4" />
-                    </svg>
-                    <span class="sr-only">Next</span>
-                </span>
-            </button>
         </div>
-
     </div>
-    @extends('layouts.footer2')
-</body>
 
-</html>
+    <!-- Our Story Section -->
+    <div id="ourStory" class="relative w-full h-[700px] flex items-center justify-center overflow-hidden">
+        <img src="https://bakerynouveau.com/wp-content/uploads/2015/11/os.jpg" alt="Shaping bread and laminating dough"
+            class="absolute top-0 left-0 w-full h-full object-cover" />
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-80 p-8 rounded-lg shadow-md text-center max-w-[80%]">
+            <h2 class="text-4xl font-bold mb-4">Our</h2>
+            <h3 class="text-2xl font-semibold mb-4">Story</h3>
+            <p class="mb-6">Bkerz Bite is a feast for the senses...</p>
+            <a href="{{ url('/overview') }}"
+                class="inline-block bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700">
+                Learn More
+            </a>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="py-16 bg-white">
+        <h2 class="text-3xl font-bold text-center mb-8">Our Creations</h2>
+        <div class="grid grid-cols-3 gap-4 mt-16">
+            <!-- Gallery Items -->
+            @foreach ([['href' => '/breakfast-pastries', 'src' => 'gallery1.jpg', 'title' => 'Breakfast Pastries'], ['href' => '/delicious-breads', 'src' => 'gallery2.jpg', 'title' => 'Delicious Breads'], ['href' => '/desserts', 'src' => 'gallery3.jpg', 'title' => 'Delicious Desserts'], ['href' => '/macarons-chocolates-cookies', 'src' => 'gallery4.jpg', 'title' => 'Macarons & Chocolates'], ['href' => '/seasonal-delights', 'src' => 'gallery5.jpg', 'title' => 'Seasonal Delights'], ['href' => '/savory-delights', 'src' => 'gallery6.jpg', 'title' => 'Savory Delights']] as $item)
+                <div class="relative overflow-hidden rounded-lg shadow-lg">
+                    <a href="{{ url($item['href']) }}">
+                        <img src="/images/{{ $item['src'] }}" alt="{{ $item['title'] }}"
+                            class="w-full h-auto object-cover transition-transform duration-300 hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                            <h3 class="text-white text-lg font-semibold">{{ $item['title'] }}</h3>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Back to Top Section -->
+    <div class="w-full text-center">
+        <a href="#top" class="inline-block mt-4">
+            <img src="https://bakerynouveau.com/wp-content/themes/bones/library/images/top.png" alt="Back to Top"
+                class="w-10">
+        </a>
+    </div>
+@endsection

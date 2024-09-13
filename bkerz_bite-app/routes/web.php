@@ -13,6 +13,19 @@ use App\Http\Controllers\ProductController;
 
 Route::get("/",[HomeController::class,"index"])->name("home");
 
+/*menu*/
+use App\Http\Controllers\MenuController;
+
+Route::get('/delicious-breads', [MenuController::class, 'showBread']);
+Route::get('/breakfast-pastries', [MenuController::class, 'showBreakfastPastries']);
+Route::get('/macarons-chocolates-cookies', [MenuController::class, 'showCookiesMacarons']);
+Route::get('/desserts', [MenuController::class, 'showDesserts']);
+Route::get('/savory-delights', [MenuController::class, 'showSavoryDelights']);
+Route::get('/seasonal-delights', [MenuController::class, 'showSeasonDelights']);
+Route::get('/overview', [MenuController::class, 'showOverview']);
+Route::get('/confections', [MenuController::class, 'showConfections']);
+Route::get('/the-peacock-series-chocolate-bars', [MenuController::class, 'showThepeacockserieshocolatebars']);
+
 
 Route::get("users/register",[UserController::class,"register"])->name("user.register");
 Route::post("users/store",[UserController::class,"store"])->name("user.store");
