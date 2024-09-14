@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\ProductController;
 
@@ -61,6 +62,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/category/{id}', [ProductController::class, 'showCategory'])->name('category.show');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
 
 
 

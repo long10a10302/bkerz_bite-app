@@ -7,12 +7,9 @@
     <title>Bakerz Bite</title>
     @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-
-
 </head>
 
 <body>
-
 
     <script src="https://unpkg.com/alpinejs@3.9.1/dist/cdn.min.js" defer></script>
 
@@ -59,14 +56,27 @@
                         <a href="#" class="text-[#7D5751] font-serif hover:underline">Happy Customers</a>
                     </li>
                     <li>
+
+                        <!-- Order Online Button -->
                         <a href="/users/login"
                             class="text-white bg-[#7D5751] font-serif px-4 py-2 rounded hover:bg-[#5c423d]">Order
                             Online</a>
+                    </li>
+                    <li class="flex items-center">
+                        <!-- Cart Icon using SVG -->
+                        <a href="/checkout" class="mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#7D5751] hover:text-[#5c423d]"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 14h9.48l1.41-6H6.45l-.94-2H2v2h2l3.6 8H17v-2H7.87l-.71-2z" />
+                            </svg>
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
 </body>
 
 </html>
