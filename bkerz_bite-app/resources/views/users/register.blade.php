@@ -1,5 +1,5 @@
 <!-- resources/views/register.blade.php -->
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Registration Form')
 

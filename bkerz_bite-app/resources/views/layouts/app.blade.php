@@ -10,10 +10,17 @@
 </head>
 
 <body>
-    @include('layouts.header')
+    {{-- Check if the current route is 'user.login' --}}
+    @if (Route::is('user.login') || Route::is('user.register'))
+        @include('layouts.header2')  {{-- Include header2 for the login page --}}
+    @else
+        @include('layouts.header1')  {{-- Include header1 for all other pages --}}
+    @endif
+    
     <main>
         @yield('content')
     </main>
+
     @include('layouts.footer2')
 </body>
 
