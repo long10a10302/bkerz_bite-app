@@ -11,7 +11,6 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 
 
-
 Route::get("/",[HomeController::class,"index"])->name("home");
 
 /*menu*/
@@ -57,6 +56,3 @@ Route::get('/{category_name}/products', [ProductController::class, 'getProductsB
 Route::get('/product/{name}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
-
-
-

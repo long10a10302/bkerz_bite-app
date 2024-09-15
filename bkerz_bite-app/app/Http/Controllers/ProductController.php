@@ -16,6 +16,7 @@ class ProductController extends Controller
         abort(404, 'Product not found.');
     }
 
+
     $relatedProducts = Product::where('category_id', $product->category_id)
     ->where('name', '!=', $product->name) // Exclude the current product
     ->take(4) // Limit to 4 products
@@ -33,6 +34,5 @@ public function getProductsByCategory($catName)
         $products = $category->products; // This uses the relationship defined in the Category model
     
         return view('products.index', compact('category', 'products'));
-}
-
+    }
 }
