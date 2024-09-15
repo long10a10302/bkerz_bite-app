@@ -1,45 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Category; // Thêm Category model
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
+
 {
-    public function showBread()
-    {
-        return view('menu.delicious-breads'); // Đảm bảo rằng đường dẫn view là đúng
+
+    public function showCookiesMacarons($categoryName)
+{
+    // Lấy category theo tên
+    $category = Category::where('category_name', $categoryName)->first();
+
+    // Nếu category không tồn tại thì có thể xử lý lỗi ở đây (ví dụ trả về 404)
+    if (!$category) {
+        abort(404, 'Category not found.');
     }
 
-    public function showBreakfastPastries()
-    {
-        return view('menu.breakfast-pastries'); // Đảm bảo rằng đường dẫn view là đúng
-    }
-    
-    public function showCookiesMacarons()
-    {
-        return view('menu.macarons-chocolates-cookies'); // Đảm bảo rằng đường dẫn view là đúng
-    }
-    
-    public function showDesserts()
-    {
-        return view('menu.desserts'); // Đảm bảo rằng đường dẫn view là đúng
-    }
-    
-    public function showSavoryDelights()
-    {
-        return view('menu.savory-delights'); // Đảm bảo rằng đường dẫn view là đúng
-    }
-    
-    public function showSeasonDelights()
-    {
-        return view('menu.seasonal-delights'); // Đảm bảo rằng đường dẫn view là đúng
-    }
-    
-    public function showOverview()
-    {
-        return view('menu.overview'); // Đảm bảo rằng đường dẫn view là đúng
-    }
+    // Lấy tất cả sản phẩm thuộc category đó
+    $products = $category->products;
+
+    // Trả về view với category và danh sách sản phẩm
+    return view('menu.categorydetail', compact('category', 'products'));
+}
     public function showConfections()
     {
         return view('menu.confections'); // Đảm bảo rằng đường dẫn view là đúng

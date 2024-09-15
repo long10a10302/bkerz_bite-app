@@ -7,41 +7,32 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function showCategory($categoryId)
+    public function show($productName)
 {
-    $category = Category::with('products')->find($categoryId);
-    return view('products.category', compact('category'));
-}
-public function show($id)
-{
-    $product = Product::with('category')->find($id);
-    return view('products.show', compact('product'));
-}
-public function index(Request $request)
-{
-    $query = Product::query();
+    // Find the product by name
+    $product = Product::where('name', $productName)->first();
     
-    // Apply category filter if present
-    if ($request->has('category_id')) {
-        $query->where('category_id', $request->input('category_id'));
+    if (!$product) {
+        abort(404, 'Product not found.');
     }
-    
-    // Apply sorting
-    if ($request->has('sort')) {
-        $query->orderBy($request->input('sort'), 'asc');
-    }
-    
-    $products = $query->with('category')->get();
-    return view('products.index', compact('products'));
-}
-public function search(Request $request)
-{
-    $searchTerm = $request->input('query');
-    $products = Product::where('name', 'LIKE', "%{$searchTerm}%")
-                       ->orWhere('description', 'LIKE', "%{$searchTerm}%")
-                       ->get();
-    return view('products.index', compact('products'));
+
+    $relatedProducts = Product::where('category_id', $product->category_id)
+    ->where('name', '!=', $product->name) // Exclude the current product
+    ->take(4) // Limit to 4 products
+    ->get();
+    // Since you're finding a single product, not a category, you can return just that product
+    return view('products.show', compact('product','relatedProducts'));
 }
 
+
+public function getProductsByCategory($catName)
+{
+    $category = Category::where('category_name', $catName)->firstOrFail();
+    
+        // Get the products related to the category
+        $products = $category->products; // This uses the relationship defined in the Category model
+    
+        return view('products.index', compact('category', 'products'));
+}
 
 }

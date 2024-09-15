@@ -24,6 +24,7 @@
                     <li>
                         <a href="#" class="text-[#7D5751] font-serif hover:underline">Home</a>
                     </li>
+                    
                     <li x-data="{ open: false }" class="relative">
                         <a href="#" @click.prevent="open = !open"
                             class="text-[#7D5751] font-serif hover:underline inline-block">Menus</a>
@@ -37,22 +38,18 @@
                             x-transition:leave-end="opacity-0 transform translate-y-1">
                             <li><a href="#"
                                     class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Overview</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Breakfast
-                                    Pastries</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Macarons,
-                                    Chocolates & Cookies</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Delicious
-                                    Breads</a></li>
-                            <li><a href="#"
-                                    class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Desserts</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Seasonal
-                                    Delights</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Savory
-                                    Delights</a></li>
+                                        @foreach($categories as $category)
+                                            <li>
+                                                <a href="{{ route('categorydetail', $category->category_name) }}"
+                                                   class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">
+                                                    {{ $category->category_name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                   
                         </ul>
                     </li>
 
-                  
                     <li x-data="{ open: false }" class="relative">
                         <a href="#" @click.prevent="open = !open"
                             class="text-[#7D5751] font-serif hover:underline inline-block">Hello {{ Auth::user()->full_name }}</a>

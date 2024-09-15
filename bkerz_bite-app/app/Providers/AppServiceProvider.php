@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Category; // Import Category model
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +18,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        // Lấy tất cả category và chia sẻ với tất cả view
+        $categories = Category::all();
+        view()->share('categories', $categories);
     }
+
 }
