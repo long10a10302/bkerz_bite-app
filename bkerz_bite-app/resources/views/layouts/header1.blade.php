@@ -40,7 +40,7 @@
                                     class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Overview</a></li>
                                         @foreach($categories as $category)
                                             <li>
-                                                <a href="{{ route('categorydetail', $category->category_name) }}"
+                                                <a href=""
                                                    class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">
                                                     {{ $category->category_name }}
                                                 </a>
@@ -108,7 +108,7 @@
                                     class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Overview</a></li>
                                         @foreach($categories as $category)
                                             <li>
-                                                <a href="{{ route('categorydetail', $category->category_name) }}"
+                                                <a href=""
                                                    class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">
                                                     {{ $category->category_name }}
                                                 </a>

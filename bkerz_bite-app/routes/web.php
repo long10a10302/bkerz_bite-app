@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\ProductController;
 
@@ -17,7 +18,6 @@ Route::get("/",[HomeController::class,"index"])->name("home");
 use App\Http\Controllers\MenuController;
 
 
-Route::get('/overview', [MenuController::class, 'showOverview']);
 
 
 
@@ -51,8 +51,14 @@ Route::get('admins/review',[AdminController::class,'review'])->name('admin.revie
 
 
 
-Route::get('/{category_name}', [MenuController::class, 'showCookiesMacarons'])->name("categorydetail");
 Route::get('/{category_name}/products', [ProductController::class, 'getProductsByCategory'])->name('products.index');
 Route::get('/product/{name}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('categorydetail');
+
+Route::middleware(['user'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name(name: 'cart');
+    Route::get('/cart/addtocart/{id}', [CartController::class, 'addCart'])->name('cart.add');
+});
