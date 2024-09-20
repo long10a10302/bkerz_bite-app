@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $category->category_name }}
+
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
 <div class="max-w-6xl mx-auto py-8 text-left">
     <!-- Category Title and Result Count -->
     <p class="woocommerce-result-count text-gray-700 text-lg mb-4">
-        <span class="current-cat font-semibold">{{ $category->category_name }}</span>
+        <span class="current-cat font-semibold"></span>
         (Showing all {{ $products->count() }} results)
     </p>
 
@@ -55,7 +55,7 @@
                     ${{ number_format($product->price, 2) }}
                 </span>
             </a>
-            <a href="{{ route('products.show', $product->name) }}" 
+            <a href="{{ route('cart.add', $product->product_id) }}" 
                 data-quantity="1" 
                 class="block text-center text-white rounded py-3 mt-4 hover:bg-opacity-90 transition duration-300" 
                 style="background-color: rgb(110, 84, 60);"

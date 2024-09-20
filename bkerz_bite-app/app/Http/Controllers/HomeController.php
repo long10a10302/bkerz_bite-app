@@ -14,7 +14,6 @@ class HomeController extends Controller
 
         return view('home', compact('categories'));
 
-
         // Pass categories to the home view
         
     }

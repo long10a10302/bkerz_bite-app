@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 
@@ -91,7 +92,7 @@ class UserController extends Controller
         
             // Lưu ID người dùng vào phiên
             $request->session()->put('user_id', $user->id);
-        
+            $request->session()->put('session_id',Str::random(10));
             // Điều hướng dựa trên vai trò của người dùng
             if ($user->role == 'admin') {
                 return redirect()->route('admin')->with('logined', 'Đăng nhập thành công');

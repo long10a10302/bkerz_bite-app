@@ -4,32 +4,65 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Cart;
+use App\Models\CartDetail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {
     //
-    public function index(){
-        return view('carts.index');
-    }
+    public function index()
+    {
+        // Lấy giỏ hàng của người dùng hiện tại
+        $cartItem = CartDetail::with('product')
+            ->whereHas('cart', function ($query) {
+                $query->where('user_id', Auth::id());
+            })
+            ->get();
 
-    public function addCart(Request $request,$id){
-        $product = Product::findOrFail($id);
-        $cart = Session::get('cart',[]);
-
-        if(isset($cart[$id])){
-            $cart[$id]['quantity']++;
-        }else{
-            $cart[$id] = [
-                'name' => $product -> name,
-                'quantity' => 1,
-                'price' => $product -> price,
-                'img' => $product -> image_url
-            ];
+        // Kiểm tra nếu giỏ hàng trống
+        if ($cartItem->isEmpty()) {
+            return view('carts.index', ['message' => 'Your cart is currently empty.']);
         }
-        Session::put('cart',$cart);
-        return redirect()->back()->with('success','Product added to cart');
+
+        // Trả về view giỏ hàng với dữ liệu sản phẩm trong giỏ hàng
+        return view('carts.index', compact('cartItem'));
     }
 
-    
+    public function addCart(Request $request, $productId)
+    {
+        // Lấy thông tin sản phẩm từ bảng products
+        $product = Product::findOrFail($productId);
+        $productId = $product->product_id;
+        $quantity = $request->input('quantity', 1); // Số lượng mặc định là 1 nếu không có input
+
+        // Kiểm tra xem người dùng đã đăng nhập hay không
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $sessionId = Session::get('session_id');
+            // Lấy hoặc tạo giỏ hàng cho người dùng đã đăng nhập
+            $cart = Cart::firstOrCreate(['user_id' => $userId, 'session_id' => $sessionId]);
+        }
+        // Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
+        $cartItem = CartDetail::where('cart_id', $cart->id)
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($cartItem) {
+            // Nếu sản phẩm đã tồn tại trong giỏ, tăng số lượng
+            $cartItem->quantity += $quantity;
+            $cartItem->save();
+        } else {
+            // Nếu sản phẩm chưa có, tạo mới sản phẩm vào giỏ
+            CartDetail::create([
+                'cart_id' => $cart->id,
+                'product_id' => $productId,
+                'quantity' => $quantity,
+            ]);
+        }
+
+        return response()->json(['message' => 'Sản phẩm đã được thêm vào giỏ hàng']);
+    }
 }

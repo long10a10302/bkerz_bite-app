@@ -62,3 +62,4 @@ Route::middleware(['user'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name(name: 'cart');
     Route::get('/cart/addtocart/{id}', [CartController::class, 'addCart'])->name('cart.add');
 });
+
