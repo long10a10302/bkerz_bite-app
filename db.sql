@@ -41,20 +41,40 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
 
 -- Dumping structure for table bkerz_bite.carts
 CREATE TABLE IF NOT EXISTS `carts` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(255) NOT NULL,
-  `product_price` decimal(10,2) NOT NULL,
-  `product_quantity` int NOT NULL,
-  `total_price` decimal(10,2) NOT NULL,
-  `user_id` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(255) NOT NULL COMMENT 'For identifying guest users',
+  `user_id` bigint unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_user_id` (`user_id`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table bkerz_bite.carts: ~0 rows (approximately)
+INSERT IGNORE INTO `carts` (`id`, `session_id`, `user_id`, `created_at`, `updated_at`) VALUES
+	(15, 'YM159p3Ptc', 5, '2024-09-20 16:28:13', '2024-09-20 16:28:13'),
+	(16, 'OHQTIRQ4OC', 6, '2024-09-20 16:51:02', '2024-09-20 16:51:02'),
+	(17, 'iPnzWWfnmZ', 6, '2024-09-20 17:20:51', '2024-09-20 17:20:51');
+
+-- Dumping structure for table bkerz_bite.cart_details
+CREATE TABLE IF NOT EXISTS `cart_details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cart_id` int DEFAULT NULL,
+  `product_id` bigint unsigned NOT NULL,
+  `quantity` int NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_cart_id` (`cart_id`),
+  KEY `fk_product_id` (`product_id`),
+  CONSTRAINT `fk_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table bkerz_bite.cart_details: ~0 rows (approximately)
+INSERT IGNORE INTO `cart_details` (`id`, `cart_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+	(17, 17, 1, 1, '2024-09-20 17:32:12', '2024-09-20 17:32:12');
 
 -- Dumping structure for table bkerz_bite.categories
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -229,14 +249,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table bkerz_bite.users: ~3 rows (approximately)
+-- Dumping data for table bkerz_bite.users: ~4 rows (approximately)
 INSERT IGNORE INTO `users` (`id`, `full_name`, `email`, `role`, `email_verified_at`, `password`, `phone_number`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(2, 'Nguyễn Đình Hưng', 'hungakb4@gmail.com', 'admin', NULL, '$2y$12$YH2QX4c8n.CGFJMf3Kg1CuDGdIDZlb4vEmVYIzgFUPWvBJbtOtOxO', '0321234567', NULL, '2024-09-09 05:44:56', '2024-09-09 05:44:56'),
 	(3, 'Hưng', 'hungakb9@gmail.com', 'admin', NULL, '$2y$12$iD3b9GqsvMQuAz0wH0G6AubXUYVoI5g7vzEea.iMWepnwbZwtE.CK', '0321234567', NULL, '2024-09-12 00:42:33', '2024-09-12 00:42:33'),
 	(4, 'sad', 'dothivan19121980@gmail.com', 'user', NULL, '$2y$12$p1aZfs4T.NIhip/P6x4zHe.gv8bhkqJQNeBc560Cg2s5p.fqj8Gs2', '0321234567', NULL, '2024-09-15 03:24:43', '2024-09-15 03:24:43'),
-	(5, 'Nguyễn Việt Long', 'long10a10302@gmail.com', 'user', NULL, '$2y$12$AnPO2D//CXzZrKdNnDFY0OxwxuTLRewoSpjZAFheubkTRc4OwNqSC', '0338095474', NULL, '2024-09-18 06:36:36', '2024-09-18 06:36:36');
+	(5, 'Nguyễn Việt Long', 'long10a10302@gmail.com', 'user', NULL, '$2y$12$AnPO2D//CXzZrKdNnDFY0OxwxuTLRewoSpjZAFheubkTRc4OwNqSC', '0338095474', NULL, '2024-09-18 06:36:36', '2024-09-18 06:36:36'),
+	(6, 'Nguyễn Gia Khánh', 'long10a11999@gmail.com', 'user', NULL, '$2y$12$ltPybGrKknccW7fa0yjfEe5uU4aA3N8dEZfolGdLIPddKe9j5I1KK', '0976581575', NULL, '2024-09-20 09:50:37', '2024-09-20 09:50:37');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
