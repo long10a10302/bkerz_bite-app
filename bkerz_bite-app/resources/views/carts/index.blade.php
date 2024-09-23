@@ -60,7 +60,7 @@
         <strong>Total: </strong> ${{ number_format($cartItem->sum(fn($item) => $item->product->price * $item->quantity), 2) }}
     </p>
 
-    <a href="{{route('checkout')}}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">Proceed to Checkout</a>
+    <a href="{{route('check_out')}}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">Proceed to Checkout</a>
     @endif
 </div>
 @endsection
