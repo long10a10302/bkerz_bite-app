@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Review;
+use App\Models\Order;
+
 class AdminController extends Controller
 {
     //
@@ -30,6 +32,11 @@ class AdminController extends Controller
     {
         $category = Category::find($id);
         return view('admins.category_edit', compact('category'));
+    }
+
+    public function order(){
+        $orders = Order::with('user')->get();
+        return view('admins.order',compact('orders'));
     }
 
     public function createCat(Request $request)

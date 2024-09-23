@@ -5,24 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Order extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'user_id',
-        'session_id'
+        'shipping_address',
+        'status',
     ];
-  
-   
-  
-    // Thiết lập quan hệ với bảng CartDetail
-    public function cartItems()
+
+    public function OrderItems()
     {
-        return $this->hasMany(CartDetail::class);
+        return $this->hasMany(OrderDetail::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }

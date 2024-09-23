@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\ProductController;
@@ -36,7 +36,7 @@ Route::get('admin/category',[AdminController::class,'category'])->name('admin.ca
 Route::get('admin/category/add',[AdminController::class,'addCat'])->name('admin.category.add');
 Route::post('admin/category/create',[AdminController::class,'createCat'])->name('admin.category.create');
 Route::get('admin/category/edit/{id}',[AdminController::class,'editCat'])->name('admin.category.edit');
-Route::put('admin/category/update/{id}',[AdminController::class,'updateCat'])->name('admin.category.update');
+Route::post('admin/category/update/{id}',[AdminController::class,'updateCat'])->name('admin.category.update');
 Route::delete('/admin/category/delete/{id}', [AdminController::class, 'destroyCat'])->name('admin.category.delete');
 
 Route::get('admin/cake/add',[AdminController::class,'addCake'])->name('admin.cake.add');
@@ -44,6 +44,10 @@ Route::post('admin/cake/create',[AdminController::class,'createCake'])->name('ad
 Route::get('admin/cake/edit/{id}',[AdminController::class,'editCake'])->name('admin.cake.edit');
 Route::put('admin/cake/update/{id}',[AdminController::class,'updateCake'])->name('admin.cake.update');
 Route::delete('/admin/cake/delete/{id}', [AdminController::class, 'destroyCake'])->name('admin.cake.delete');
+
+Route::get('admin/order',[AdminController::class,'order'])->name('admin.order');
+Route::put('admin/order/update/{id}', [OrderController::class, 'updateOrder'])
+    ->name('admin.order.updateOrder');
 
 Route::get('admins/review',[AdminController::class,'review'])->name('admin.review');
 
@@ -55,11 +59,16 @@ Route::get('/{category_name}/products', [ProductController::class, 'getProductsB
 Route::get('/product/{name}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/product', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('categorydetail');
 
 Route::middleware(['user'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name(name: 'cart');
     Route::get('/cart/addtocart/{id}', [CartController::class, 'addCart'])->name('cart.add');
+    Route::post('/cart/update-quantity/{id}', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
+    Route::delete('cart/delete-cart/{id}',[CartController::class,'destroyCart'])->name('cart.remove');
+
+    Route::get('/checkout', [OrderController::class, 'index'])->name(name: 'checkout');
+    Route::post('/order', [OrderController::class, 'createOrder'])->name(name: 'order');
+
+
 });
 

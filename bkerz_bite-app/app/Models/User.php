@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 use  App\Models\Cart;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -54,5 +55,13 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-  
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
