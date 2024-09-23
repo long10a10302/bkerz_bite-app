@@ -52,13 +52,13 @@
                 <h5 class="font-bold uppercase text-[#605151] text-xl mb-3">{{ $product->name }}</h5>
                 <p class="mb-3">{{ $product->description }}</p>
                 <!-- Buy Button -->
-                 <a href="{{ route('products.index', $category->category_name) }}">
-                    <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mt-4">
-                        View All Products
-                    </button>
-                </a>
             </div>
         @endforeach
+        <a href="{{ route('products.index', $category->category_name) }}">
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mt-4">
+                View All Products
+            </button>
+        </a>
     </div>
 </div>
 

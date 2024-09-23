@@ -36,11 +36,11 @@
                             x-transition:leave="transition ease-in duration-200"
                             x-transition:leave-start="opacity-100 transform translate-y-0"
                             x-transition:leave-end="opacity-0 transform translate-y-1">
-                            <li><a href="#"
+                            <li><a href="{{ route('overview') }}"
                                     class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Overview</a></li>
                                         @foreach($categories as $category)
                                             <li>
-                                                <a href=""
+                                                <a href="{{ route('categorydetail', $category->category_name) }}"
                                                    class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">
                                                     {{ $category->category_name }}
                                                 </a>
@@ -68,7 +68,7 @@
                     </li>
                     <li class="flex items-center">
                         <!-- Cart Icon using SVG -->
-                        <a href="/checkout" class="mr-4">
+                        <a href="{{ route('check_out') }}" class="mr-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#7D5751] hover:text-[#5c423d]"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path
@@ -104,11 +104,11 @@
                             x-transition:leave="transition ease-in duration-200"
                             x-transition:leave-start="opacity-100 transform translate-y-0"
                             x-transition:leave-end="opacity-0 transform translate-y-1">
-                            <li><a href="#"
+                            <li><a href="{{ route('overview') }}"
                                     class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">Overview</a></li>
                                         @foreach($categories as $category)
                                             <li>
-                                                <a href=""
+                                                <a href="{{ route('categorydetail', $category->category_name) }}"
                                                    class="block px-4 py-2 hover:bg-[#7D5751] hover:text-white">
                                                     {{ $category->category_name }}
                                                 </a>
@@ -130,7 +130,7 @@
 
                     <li class="flex items-center">
                         <!-- Cart Icon using SVG -->
-                        <a href="/checkout" class="mr-4">
+                        <a href="{{ route('check_out') }}" class="mr-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#7D5751] hover:text-[#5c423d]"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path

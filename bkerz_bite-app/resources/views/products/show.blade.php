@@ -94,31 +94,44 @@
             </div>
         </form>
     </div>
-    <section class="related products mt-10">
+    <section class="related products mt-10 w-full ">
         <h2 class="text-2xl font-semibold mb-6">Related Products</h2>
         <ul class="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($relatedProducts as $relatedProduct)
-                <li class="product type-product mb-6">
-                    <a href="{{ route('products.show', $relatedProduct->name) }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                <li class="product type-product mb-6 overflow-hidden">
+                    <a href="{{ route('products.show', $relatedProduct->name) }}" 
+                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                       
+                        <!-- Product Image -->
                         <img width="300" height="300" src="{{ $relatedProduct->image_url }}" 
-                             class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail object-cover w-full h-full mb-4" 
+                             class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail object-cover w-full h-48 mb-4" 
                              alt="{{ $relatedProduct->name }}" />
-                        <h2 class="woocommerce-loop-product__title text-lg font-semibold">{{ $relatedProduct->name }}</h2>
+                             
+                        <!-- Product Name -->
+                        <h2 class="woocommerce-loop-product__title text-lg font-semibold text-gray-900">{{ $relatedProduct->name }}</h2>
+                        
+                        <!-- Product Price -->
                         <span class="price block mt-2">
                             <span class="woocommerce-Price-amount amount">
-                                <p class="price text-2xl text-gray-800 mb-4">
-                                    ${{$product->price}}
+                                <p class="price text-xl text-gray-700 mb-2">
+                                    ${{$relatedProduct->price}}
                                 </p>
                             </span>
                         </span>
                     </a>
+                    
+                    <!-- Select Options Button -->
                     <a href="{{ route('products.show', $relatedProduct->name) }}" 
-                       class="button product_type_variable add_to_cart_button mt-4 bg-brown-700 text-white py-2 px-4 rounded hover:bg-brown-800 transition duration-300"
-                       rel="nofollow">Select options</a>
+                       class="block text-center text-white rounded py-3 mt-4 hover:bg-opacity-90 transition duration-300" 
+                        style="background-color: rgb(110, 84, 60);"
+                       rel="nofollow">
+                       Select Options
+                    </a>
                 </li>
             @endforeach
         </ul>
-    </section>        
+    </section>
+           
 </div>
 
 @endsection

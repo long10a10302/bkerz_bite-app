@@ -18,7 +18,7 @@
             <!-- Content Section -->
             <section id="content" class="py-8 px-4">
                 <!-- Introduction Text -->
-                <div class="max-w-2xl mx-auto mb-8 text-center">
+                <div class="text-left py-3 px-4 mt-6 mx-auto w-full max-w-6xl">
                     <h3 class="text-3xl font-semibold mb-4">Enjoy</h3>
                     <p class="text-lg text-gray-700">
                         The following pages contain samples of the wide range of products available at Bakery Nouveau.
@@ -35,12 +35,29 @@
                 </div>
 
                 <!-- Page Buckets -->
-                <div id="pageBuckets" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <!-- Content for buckets will be added here -->
+                <div id="pageBuckets" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mt-8 max-w-6xl mx-auto">
+                    @foreach ($categories as $category)
+                        <div class="pageBucket shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
+                            <div class="pageBucketImage">
+                                <a href="{{ route('categorydetail', $category->category_name) }}">
+                                    <img src="{{ $category->img_url }}" alt="{{ $category->category_name }}" class="w-full h-48 object-cover">
+                                </a>
+                            </div>
+                            <div class="pageBucketText p-4 flex flex-col items-center justify-between text-center max-w-3xl mx-auto h-[300px]">
+                                <h4 class="text-lg font-bold mb-2">{{ $category->category_name }}</h4>
+                                <p class="text-gray-600 mb-4">{{ $category->description }}</p>
+                                <a href="{{ route('categorydetail', $category->category_name) }}" class="inline-block w-full max-w-xs py-2 px-4 bg-[#5a3a27] text-white font-bold tracking-wider border border-[#5a3a27] shadow-[inset_0_0_0_1px_white,inset_0_0_0_3px_#5a3a27] rounded-md hover:bg-[#4e3322] transition duration-300 text-center">
+                                    VIEW MENU
+                                </a>
+                            </div>
+                            
+                            
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Allergen Information -->
-                <div class="max-w-2xl mx-auto text-gray-700">
+                <div class="text-left py-4 px-4 mt-6 mx-auto w-full max-w-6xl">
                     <p class="note text-base mb-6">
                         <strong>Information on Allergens</strong><br>
                         We at Bkerz Bite are committed to exceptional standards of quality and kitchen organization.

@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\ProductController;
 
@@ -50,16 +51,15 @@ Route::get('admins/review',[AdminController::class,'review'])->name('admin.revie
 });
 
 
-
-Route::get('/{category_name}/products', [ProductController::class, 'getProductsByCategory'])->name('products.index');
+Route::get('/{category_name}', [CategoryController::class, 'showCookiesMacarons'])->name("categorydetail");
+Route::get('/{category_name}/products', [CategoryController::class, 'getProductsByCategory'])->name('products.index');
 Route::get('/product/{name}', [ProductController::class, 'show'])->name('products.show');
-Route::get('/product', [ProductController::class, 'index'])->name('products.index');
+Route::get('/category/overview', [CategoryController::class, 'overview']) ->name('overview') ;
 
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('categorydetail');
+Route::get('/orders/checkout', [CheckoutController::class, 'show'])->name('check_out');
 
 Route::middleware(['user'])->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])->name(name: 'cart');
+    Route::get('/cart/index', [CartController::class, 'index'])->name(name: 'cart');
     Route::get('/cart/addtocart/{id}', [CartController::class, 'addCart'])->name('cart.add');
 });
 
