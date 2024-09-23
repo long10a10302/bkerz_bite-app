@@ -65,4 +65,34 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Sản phẩm đã được thêm vào giỏ hàng']);
     }
+
+    public function updateQuantity(Request $request, $id)
+    {
+        $cartItem = CartDetail::findOrFail($id);
+
+        // Kiểm tra nếu số lượng >= 1
+        if ($request->quantity >= 1) {
+            $cartItem->quantity = $request->quantity;
+            $cartItem->save();
+
+            return response()->json(['success' => true, 'quantity' => $cartItem->quantity]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Invalid quantity']);
+    }
+
+    public function destroyCart($id)
+    {
+        $cartItem = CartDetail::findOrFail($id);
+        $cartId = $cartItem->cart_id;
+        $cartItem->delete();
+        $cart = Cart::with('cartItems')->find($cartId);
+
+        if ($cart && $cart->cartItems->isEmpty()) {
+            // Nếu không còn sản phẩm nào trong giỏ hàng, xóa giỏ hàng
+            $cart->delete();
+        }
+
+        return redirect()->route('cart')->with('success', 'Cart item removed successfully.');
+    }
 }
