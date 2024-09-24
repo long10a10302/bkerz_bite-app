@@ -41,7 +41,7 @@
         <!-- Product Loop Starts Here -->
         <li class="product bg-white shadow-none overflow-hidden text-left">
             <a href="{{ route('products.show', $product->name) }}" class="block">
-                <img src="https://bakerynouveau.com/wp-content/uploads/2016/02/pastries_hm.jpg" 
+                <img src="{{ asset('images/' . $product->image_url) }}" 
                      alt="{{ $product->name }}" 
                      class="w-full h-64 object-cover"
                      loading="lazy" />

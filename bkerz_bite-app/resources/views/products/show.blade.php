@@ -33,7 +33,7 @@
             <div class="woocommerce-product-gallery__wrapper">
                 <div class="woocommerce-product-gallery__image">
                     <a href="{{ $product->image_url }}">
-                        <img width="530" height="530" src="https://bakerynouveau.com/wp-content/uploads/2020/03/cheese_cake_red_glaze_F.jpg" 
+                        <img width="530" height="530" src="{{ asset('images/' . $product->image_url) }}" 
                              class="wp-post-image object-cover w-[530px] h-[530px]" 
                              alt="{{ $product->name }}" 
                              title="{{ $product->name }}"
@@ -103,7 +103,7 @@
                        class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                        
                         <!-- Product Image -->
-                        <img width="300" height="300" src="{{ $relatedProduct->image_url }}" 
+                        <img width="300" height="300" src="{{ asset('images/' . $relatedProduct->image_url) }}" 
                              class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail object-cover w-full h-48 mb-4" 
                              alt="{{ $relatedProduct->name }}" />
                              

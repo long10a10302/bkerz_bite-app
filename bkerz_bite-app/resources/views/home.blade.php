@@ -32,15 +32,16 @@
     @foreach ($categories as $category)
     <div class="relative overflow-hidden rounded-lg shadow-lg">
         <a href="{{ route('categorydetail', $category->category_name) }}" class="block">
-            <div class="aspect-w-1 aspect-h-1">
-                <img src="{{ asset('images/' . $category->img_url) }}" alt="{{ $category->category_name }}" class="object-cover w-full h-full transition-transform duration-300 hover:scale-110">
+            <div class="aspect-w-1 aspect-h-1 w-full h-64"> <!-- Set a fixed height to maintain consistency -->
+                <img src="{{ asset('images/' . $category->img_url) }}" alt="{{ $category->category_name }}" 
+                     class="object-cover w-full h-full transition-transform duration-300 hover:scale-110">
             </div>
-            <div
-                class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                 <h3 class="text-white text-lg font-semibold">{{$category->category_name}}</h3>
             </div>
         </a>
     </div>
+    
     @endforeach
 </div>
 

@@ -9,7 +9,7 @@
     <main>  
         <!-- Page Banner -->
         <section id="pageBanner" class="relative text-center">
-            <img class="w-full h-auto" src="{{ $category->img_url }}" alt="{{ $category->category_name }}">
+            <img class="w-full h-auto" src="{{ asset('images/' . $category->img_url) }}" alt="{{ $category->category_name }}">
             <h1 class="absolute top-[5%] left-1/2 transform -translate-x-1/2 text-white text-4xl font-bold bg-opacity-50 shadow-lg">Chocolates</h1>
             <h2 class="absolute top-[40%] left-1/2 transform -translate-x-1/2 text-white text-2xl bg-opacity-50 shadow-lg">Macarons & Cookies</h2>
         </section>
@@ -29,7 +29,7 @@
                     <div class="flex-shrink-0 w-28 lg:w-32 xl:w-36">
                         <a href="#">
                             <img 
-                                src="{{ $product->image_url }}" 
+                                src="{{  asset('images/' . $product->image_url) }}" 
                                 alt="{{ $product->name }}" 
                                 class="w-full h-32 object-cover rounded-md shadow-md"
                             >

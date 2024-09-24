@@ -40,7 +40,7 @@
                         <div class="pageBucket shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                             <div class="pageBucketImage">
                                 <a href="{{ route('categorydetail', $category->category_name) }}">
-                                    <img src="{{ $category->img_url }}" alt="{{ $category->category_name }}" class="w-full h-48 object-cover">
+                                    <img src="{{ asset('images/' . $category->img_url) }}" class="w-full h-48 object-cover">
                                 </a>
                             </div>
                             <div class="pageBucketText p-4 flex flex-col items-center justify-between text-center max-w-3xl mx-auto h-[300px]">
