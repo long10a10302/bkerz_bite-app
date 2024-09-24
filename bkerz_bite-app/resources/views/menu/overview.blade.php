@@ -46,7 +46,7 @@
                             <div class="pageBucketText p-4 flex flex-col items-center justify-between text-center max-w-3xl mx-auto h-[300px]">
                                 <h4 class="text-lg font-bold mb-2">{{ $category->category_name }}</h4>
                                 <p class="text-gray-600 mb-4">{{ $category->description }}</p>
-                                <a href="{{ route('categorydetail', $category->category_name) }}" class="inline-block w-full max-w-xs py-2 px-4 bg-[#5a3a27] text-white font-bold tracking-wider border border-[#5a3a27] shadow-[inset_0_0_0_1px_white,inset_0_0_0_3px_#5a3a27] rounded-md hover:bg-[#4e3322] transition duration-300 text-center">
+                                <a href="{{ route('categorydetail', $category->category_id) }}" class="inline-block w-full max-w-xs py-2 px-4 bg-[#5a3a27] text-white font-bold tracking-wider border border-[#5a3a27] shadow-[inset_0_0_0_1px_white,inset_0_0_0_3px_#5a3a27] rounded-md hover:bg-[#4e3322] transition duration-300 text-center">
                                     VIEW MENU
                                 </a>
                             </div>

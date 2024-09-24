@@ -31,7 +31,7 @@
     <!-- Gallery Items -->
     @foreach ($categories as $category)
     <div class="relative overflow-hidden rounded-lg shadow-lg">
-        <a href="{{ route('categorydetail', $category->category_name) }}" class="block">
+        <a href="{{ route('categorydetail', $category->category_id) }}" class="block">
             <div class="aspect-w-1 aspect-h-1 w-full h-64"> <!-- Set a fixed height to maintain consistency -->
                 <img src="{{ asset('images/' . $category->img_url) }}" alt="{{ $category->category_name }}" 
                      class="object-cover w-full h-full transition-transform duration-300 hover:scale-110">

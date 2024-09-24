@@ -18,6 +18,19 @@ class OrderController extends Controller
         return view('carts.checkout', compact('cart'));
     }
 
+    public function status()
+    {
+        $userId = Auth::id();
+
+        // Retrieve all orders for the authenticated user, including their order details and products
+        $orders = Order::with('orderItems.product')
+            ->where('user_id', $userId)
+            ->get();
+
+        return view('carts.status', compact('orders'));
+    }
+
+
     public function createOrder(Request $request)
     {
         $request->validate([
@@ -55,32 +68,31 @@ class OrderController extends Controller
     }
 
     public function updateOrder(Request $request, $id)
-{
-    // Validate the incoming request
-    $request->validate([
-        'status' => 'required|in:Đang xử lý,Đã giao,Đã hủy',  // Ensure only allowed statuses
-    ]);
+    {
+        // Validate the incoming request
+        $request->validate([
+            'status' => 'required|in:Đang xử lý,Đã giao,Đã hủy',  // Ensure only allowed statuses
+        ]);
 
-    // Find the order by its ID
-    $order = Order::find($id);  // Correctly passing $id variable here
+        // Find the order by its ID
+        $order = Order::find($id);  // Correctly passing $id variable here
 
-    if ($order) {
-        $order->status = $request->input('status');
-        
-        try {
-            $order->save();
-            return redirect()->route('admin.category')->with('success', 'Order updated successfully.');
-        } catch (\Exception $e) {
-            // Log the exception for debugging (optional)
-            \Log::error('Order update failed: ' . $e->getMessage());
-    
-            return redirect()->route('admin.category')->with('error', 'Order update failed. Please try again.');
+        if ($order) {
+            $order->status = $request->input('status');
+
+            try {
+                $order->save();
+                return redirect()->route('admin.category')->with('success', 'Order updated successfully.');
+            } catch (\Exception $e) {
+                // Log the exception for debugging (optional)
+                \Log::error('Order update failed: ' . $e->getMessage());
+
+                return redirect()->route('admin.category')->with('error', 'Order update failed. Please try again.');
+            }
+        } else {
+            return redirect()->route('admin.category')->with('error', 'Order not found.');
         }
-    } else {
-        return redirect()->route('admin.category')->with('error', 'Order not found.');
     }
-    
-}
 
     private function clearCart($userId)
     {
@@ -89,5 +101,28 @@ class OrderController extends Controller
             CartDetail::where('cart_id', $cart->cart_id)->delete();
             $cart->delete();
         }
+    }
+    public function cancelOrderDetail($orderId)
+    {
+        // Get all order details associated with the order_id
+        $orderDetails = OrderDetail::where('order_id', $orderId)->get();
+    
+        // Delete each order detail
+        foreach ($orderDetails as $orderDetail) {
+            $orderDetail->delete();
+        }
+    
+        // Update the status of the order to 'canceled'
+        $order = Order::findOrFail($orderId);
+        $order->status = 'Đã hủy';
+        $order->save();
+    
+        return redirect()->back()->with('success', 'Đơn hàng đã được hủy.');
+    }
+    public function cancelOrderDetailAll(Request $request){
+        $user = auth::user();
+        // Logic to cancel all orders for the authenticated user
+        Order::where('user_id', $user->id)->delete();
+        return redirect()->back()->with('success', 'Đơn hàng đã được hủy.');
     }
 }

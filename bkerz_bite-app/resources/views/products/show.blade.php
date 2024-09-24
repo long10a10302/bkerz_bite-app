@@ -65,26 +65,11 @@
         </div>
 
         <!-- Product Form -->
-        <form class="variations_form cart mb-4" method="post" enctype="multipart/form-data" data-product_id="{{ $product->id }}">
+        <form action="{{ route('cart.add', $product->product_id) }}" class="variations_form cart mb-4" method="get" enctype="multipart/form-data" data-product_id="{{ $product->id }}">
             <!-- Quantity and Add to Cart Button -->
             <div class="single_variation_wrap">
                 <div class="woocommerce-variation-add-to-cart variations_button mb-4">
-                    <div class="quantity mb-4">
-                        <label class="screen-reader-text" for="quantity_{{ $product->id }}">Quantity</label>
-                        <input
-                            type="number"
-                            id="quantity_{{ $product->id }}"
-                            class="input-text qty text w-12 p-1 border border-gray-300 rounded" 
-                            name="quantity"
-                            value="1"
-                            aria-label="Product quantity"
-                            size="4"
-                            min="1"
-                            step="1"
-                            inputmode="numeric"
-                            autocomplete="off"
-                        />
-                    </div>
+                    
                     <button type="submit" 
                     style="background-color: rgb(110, 84, 60);"
                     class="single_add_to_cart_button button alt text-white bg-brown-700 py-2 px-4 rounded hover:bg-brown-800 transition duration-300 flex-shrink-0">ADD TO CART</button>

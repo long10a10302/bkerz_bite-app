@@ -17,10 +17,10 @@ class CategoryController extends Controller
     // Pass the categories to the view
     return view('menu.overview', compact('categories'));
 }
-public function showCookiesMacarons($categoryName)
+public function showCookiesMacarons($id)
 {
     // Lấy category theo tên
-    $category = Category::where('category_name', $categoryName)->first();
+    $category = Category::where('category_id', $id)->first();
     // Nếu category không tồn tại thì có thể xử lý lỗi ở đây (ví dụ trả về 404)
     if (!$category) {
         abort(404, 'Category not found.');
@@ -30,9 +30,9 @@ public function showCookiesMacarons($categoryName)
     // Trả về view với category và danh sách sản phẩm
     return view('menu.categorydetail', compact('category', 'products'));
 }
-public function getProductsByCategory($catName)
+public function getProductsByCategory($id)
 {
-    $category = Category::where('category_name', $catName)->firstOrFail();
+    $category = Category::where('category_id', $id)->firstOrFail();
     
         // Get the products related to the category
         $products = $category->products; // This uses the relationship defined in the Category model

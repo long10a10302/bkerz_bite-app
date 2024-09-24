@@ -4,17 +4,60 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Review;
 use App\Models\Order;
+use App\Models\OrderDetail;
 
 class AdminController extends Controller
 {
     //
     public function index()
     {
-        return view('admins.index');
+        // Tổng doanh thu
+        $todayRevenue = OrderDetail::whereDate('created_at', now())->sum(DB::raw('quantity * price'));
+        $weeklyRevenue = OrderDetail::whereBetween('created_at', [now()->startOfWeek(), now()])->sum(DB::raw('quantity * price'));
+        $monthlyRevenue = OrderDetail::whereMonth('created_at', now()->month)->sum(DB::raw('quantity * price'));
+        $yearlyRevenue = OrderDetail::whereYear('created_at', now()->year)->sum(DB::raw('quantity * price'));
+
+        // Tổng số đơn hàng
+        $todayOrders = Order::whereDate('created_at', now())->count();
+        $weeklyOrders = Order::whereBetween('created_at', [now()->startOfWeek(), now()])->count();
+        $monthlyOrders = Order::whereMonth('created_at', now()->month)->count();
+
+        // Giá trị đơn hàng trung bình
+        $averageOrderValue = OrderDetail::avg(DB::raw('quantity * price'));
+
+        // Sản phẩm bán chạy nhất (Top 5)
+        $topSellingProducts = OrderDetail::with('product')
+            ->selectRaw('product_id, SUM(quantity) as total_quantity')
+            ->groupBy('product_id')
+            ->orderBy('total_quantity', 'desc')
+            ->take(5)
+            ->get();
+
+        // Doanh thu theo danh mục
+        
+
+        // Khách hàng mới vs khách hàng quay lại
+      
+
+        // Tình trạng đơn hàng
+        $orderStatusCounts = Order::selectRaw('status, COUNT(*) as count')->groupBy('status')->get();
+
+        // Xu hướng đơn hàng
+        $orderTrends = Order::selectRaw('DATE(created_at) as date, COUNT(*) as total_orders')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return view('admins.index', compact(
+            'todayRevenue', 'weeklyRevenue', 'monthlyRevenue', 'yearlyRevenue',
+            'todayOrders', 'weeklyOrders', 'monthlyOrders', 'averageOrderValue',
+            'orderStatusCounts', 'orderTrends'
+        ));
     }
     //-----------------------------------------------------------------------------------------------
 

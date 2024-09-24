@@ -60,7 +60,7 @@
                 class="block text-center text-white rounded py-3 mt-4 hover:bg-opacity-90 transition duration-300" 
                 style="background-color: rgb(110, 84, 60);"
                 aria-label="Add to cart: “{{ $product->name }}”" 
-                rel="nofollow">Select options</a>
+                rel="nofollow">Add to Cart</a>
         </li>
         <!-- Product Loop Ends Here -->
         @endforeach

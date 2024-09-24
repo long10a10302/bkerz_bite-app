@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $category->category_name }}
+{{ $category->category_id }}
 @endsection
 
 @section('content')
@@ -36,35 +36,40 @@
                         </a>
                     </div>
                 @endforeach
-            </div>
-        </section>
-        
-        
-            <!-- Separator -->
-            <div class="border-t border-gray-300 my-6"></div>
 
-            <!-- Product Info Section -->
-<!-- Product Info Section -->
-<div class="flex flex-col lg:flex-row justify-between mb-8 px-10">
-    <div class="lg:w-full">
-        @foreach ($products as $product)
+            </div>
+            @endforeach
+        </div>
+    </section>
+
+
+    <!-- Separator -->
+    <div class="border-t border-gray-300 my-6"></div>
+
+    <!-- Product Info Section -->
+    <!-- Product Info Section -->
+    <div class="flex flex-col lg:flex-row justify-between mb-8 px-10">
+        <div class="lg:w-full">
+            @foreach ($products as $product)
             <div class="mb-8">
                 <h5 class="font-bold uppercase text-[#605151] text-xl mb-3">{{ $product->name }}</h5>
                 <p class="mb-3">{{ $product->description }}</p>
                 <!-- Buy Button -->
-            </div>
-        @endforeach
-        <a href="{{ route('products.index', $category->category_name) }}">
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mt-4">
-                View All Products
-            </button>
-        </a>
-    </div>
-</div>
 
-        </section>
-    </main>
+            </div>
+            @endforeach
+            <a href="{{ route('products.index', $category->category_id) }}">
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mt-4">
+                    View All Products
+                </button>
+            </a>
+        </div>
+    </div>
+
+    </section>
+</main>
 
 </body>
+
 </html>
 @endsection

@@ -22,7 +22,7 @@
             <div class="hidden w-full md:flex md:w-auto justify-between items-center" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0">
                     <li>
-                        <a href="#" class="text-[#7D5751] font-serif hover:underline">Home</a>
+                        <a href="/" class="text-[#7D5751] font-serif hover:underline">Home</a>
                     </li>
                   
 

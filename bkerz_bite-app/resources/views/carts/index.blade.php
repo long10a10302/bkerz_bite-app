@@ -35,10 +35,10 @@
 
                         <!-- Nút tăng số lượng -->
                         <button type="button" class="increase px-2 py-1 bg-gray-300 rounded-r" data-id="{{ $item->id }}">
-                            +
-                        </button>
-                    </div>
-                </td>
+                                +
+                            </button>
+                        </div>
+                    </td>
 
 
                 <td class="py-2 px-4 border-b">${{ number_format($item->product->price, 2) }}</td>

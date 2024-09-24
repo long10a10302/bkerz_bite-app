@@ -32,29 +32,37 @@
     </div>
 
     <script>
-        function updateOrderStatus(orderId, status) {
-            fetch(`/order/update-status/${orderId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        status: status
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Status updated successfully!');
-                    } else {
-                        alert(data.message || 'Unable to update status.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
+        function updateStatusOptions() {
+            const select = document.getElementById('orderStatus');
+            const selectedValue = select.value;
 
+            // Xóa tất cả các tùy chọn
+            select.innerHTML = '';
+
+            // Tùy chọn cho trạng thái "Đang xử lý"
+            if (selectedValue === 'Đang xử lý') {
+                select.innerHTML += '<option value="Đang xử lý" selected>Đang xử lý</option>';
+                select.innerHTML += '<option value="Đã giao">Đã giao</option>';
+                select.innerHTML += '<option value="Đã hủy">Đã hủy</option>';
+            }
+
+            // Tùy chọn cho trạng thái "Đã giao"
+            else if (selectedValue === 'Đã giao') {
+                select.innerHTML += '<option value="Đã giao" selected>Đã giao</option>';
+                select.innerHTML += '<option value="Đã hủy">Đã hủy</option>';
+            }
+
+            // Tùy chọn cho trạng thái "Đã hủy"
+            else if (selectedValue === 'Đã hủy') {
+                select.innerHTML += '<option value="Đã hủy" selected>Đã hủy</option>';
+            }
+        }
+
+        // Gọi hàm để thiết lập trạng thái ban đầu khi tải trang
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatusOptions();
+        });
+    </script>
 </body>
 
 </html>

@@ -79,19 +79,8 @@
         });
     </script>
 
-    <script>
-        function handleFormSubmit(event) {
-            const payByCard = document.getElementById('payByCard');
 
-            if (payByCard.checked) {
-                event.preventDefault(); // Ngăn chặn gửi biểu mẫu
-                alert('Tính năng đang phát triển, vui lòng thử lại sau!');
-                return false; // Trả về false để không gửi biểu mẫu
-            }
 
-            return true; // Chấp nhận gửi biểu mẫu nếu không chọn "Pay by card"
-        }
-    </script>
 </body>
 
 </html>
