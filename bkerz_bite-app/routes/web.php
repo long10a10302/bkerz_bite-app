@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReviewController;
 
 use App\Http\Controllers\ProductController;
 
@@ -38,7 +39,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/category/add', [AdminController::class, 'addCat'])->name('admin.category.add');
     Route::post('admin/category/create', [AdminController::class, 'createCat'])->name('admin.category.create');
     Route::get('admin/category/edit/{id}', [AdminController::class, 'editCat'])->name('admin.category.edit');
-    Route::post('admin/category/update/{id}', [AdminController::class, 'updateCat'])->name('admin.category.update');
+    Route::put('admin/category/update/{id}', [AdminController::class, 'updateCat'])->name('admin.category.update');
     Route::delete('/admin/category/delete/{id}', [AdminController::class, 'destroyCat'])->name('admin.category.delete');
 
     Route::get('admin/cake/add', [AdminController::class, 'addCake'])->name('admin.cake.add');
@@ -60,6 +61,7 @@ Route::get('/{category_name}/products', [CategoryController::class, 'getProducts
 Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/category/overview', [CategoryController::class, 'overview'])->name('overview');
 
+Route::get('/products/index',[ProductController::class,'index'])->name('product.index');
 
 
 Route::middleware(['user'])->group(function () {
@@ -72,6 +74,9 @@ Route::middleware(['user'])->group(function () {
     Route::post('/order', [OrderController::class, 'createOrder'])->name(name: 'order');
 
     Route::get('/order/status', [OrderController::class, 'status'])->name(name: 'status');
+
+    Route::get('users/review',[ReviewController::class,"review"])->name("user.review");
+    Route::post('users/reviewed',[ReviewController::class,"reviewed"])->name("user.reviewed");
 
     Route::post('/orders/cancel-all', [OrderController::class, 'cancelOrderDetailAll'])->name('orders.cancelAll');
     Route::delete('/orders/cancel/{id}', [OrderController::class, 'cancelOrderDetail'])->name('orders.cancel');

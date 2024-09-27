@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::all();
+        $products = Product::paginate(6); // Thay số 9 bằng số sản phẩm bạn muốn hiển thị mỗi trang.
+
         return view('products.index',compact('products'));
     }
     public function show($id)

@@ -25,33 +25,24 @@
     </p>
 </div>
 
-
-
 <!-- Product Listing Section -->
 <div class="max-w-6xl mx-auto py-8 text-left">
     <!-- Category Title and Result Count -->
     <p class="woocommerce-result-count text-gray-700 text-lg mb-4">
-        <span class="current-cat font-semibold"></span>
         (Showing all {{ $products->count() }} results)
     </p>
 
     <!-- Product Grid -->
     <ul class="products grid grid-cols-3 gap-6">
         @foreach ($products as $product)
-        <!-- Product Loop Starts Here -->
         <li class="product bg-white shadow-none overflow-hidden text-left">
             <a href="{{ route('products.show', $product->product_id) }}" class="block">
                 <img src="{{ asset('images/' . $product->image_url) }}" 
                      alt="{{ $product->name }}" 
                      class="w-full h-64 object-cover"
                      loading="lazy" />
-                <h2 
-                    class="woocommerce-loop-product__title text-xl mt-4 "
-                    style="color: rgb(110, 84, 60);">{{ $product->name }}</h2>
-                
-                <span 
-                    class="price block text-gray-800 text-lg mt-2 "
-                    style="color: rgb(110, 84, 60);">
+                <h2 class="woocommerce-loop-product__title text-xl mt-4 " style="color: rgb(110, 84, 60);">{{ $product->name }}</h2>
+                <span class="price block text-gray-800 text-lg mt-2 " style="color: rgb(110, 84, 60);">
                     ${{ number_format($product->price, 2) }}
                 </span>
             </a>
@@ -62,15 +53,13 @@
                 aria-label="Add to cart: “{{ $product->name }}”" 
                 rel="nofollow">Add to Cart</a>
         </li>
-        <!-- Product Loop Ends Here -->
         @endforeach
     </ul>
-    
+
+    <!-- Pagination -->
+    <div class="mt-8">
+        {{ $products->links() }} <!-- Thêm dòng này để hiển thị phân trang -->
+    </div>
 </div>
 
-
-    
 @endsection
-
-
-

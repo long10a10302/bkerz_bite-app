@@ -50,17 +50,20 @@
                                     VIEW MENU
                                 </a>
                             </div>
-                            
-                            
                         </div>
                     @endforeach
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-8">
+                    {{ $categories->links() }} <!-- Thêm dòng này để hiển thị phân trang -->
                 </div>
 
                 <!-- Allergen Information -->
                 <div class="text-left py-4 px-4 mt-6 mx-auto w-full max-w-6xl">
                     <p class="note text-base mb-6">
                         <strong>Information on Allergens</strong><br>
-                        We at Bkerz Bite are committed to exceptional standards of quality and kitchen organization.
+                        We at Bakery Nouveau are committed to exceptional standards of quality and kitchen organization.
                         However, as we are a small shop, all of our equipment is shared.
                         Please do not hesitate to ask if you have a question or concern about a particular product.
                     </p>

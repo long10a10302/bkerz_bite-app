@@ -12,7 +12,7 @@ class HomeController extends Controller
     //
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(6); // Thay số 6 bằng số danh mục bạn muốn hiển thị mỗi trang.
         return view('home', compact('categories'));
 
         // Pass categories to the home view

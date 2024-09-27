@@ -16,9 +16,15 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == 'admin') {
-            return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->role == 'admin') {
+                return $next($request);
+            } else {
+                abort(404, 'Page Not found');
+            }
+        }else{
+            return redirect()->route('user.login')->with('error','Vui lòng đăng nhập');
+
         }
-        abort(401);
     }
 }

@@ -18,8 +18,8 @@
             <table class="min-w-full bg-white rounded-lg shadow">
                 <thead class="bg-blue-800 text-white">
                     <tr>
-                        <th class="py-2 px-4 text-left">Tên bánh</th>
-                        <th class="py-2 px-4 text-left">Người đánh giá</th>
+                       
+    
                         <th class="py-2 px-4 text-left">Rating</th>
                         <th class="py-2 px-4 text-left">Comment</th>
                         <th class="py-2 px-4 text-left">Date review</th>
@@ -28,8 +28,7 @@
                 <tbody>
                     @foreach ($reviews as $review)
                     <tr class="border-b">
-                        <td class="py-2 px-4">{{ $review -> product -> name}}</ td>
-                        <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $review -> user -> full_name}}</td>
+                        
                         <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $review -> rating}}</td>
                         <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $review -> comment}}</td>
                         <td class="py-2 px-4 overflow-hidden line-clamp-1">{{ $review -> review_date}}</td>

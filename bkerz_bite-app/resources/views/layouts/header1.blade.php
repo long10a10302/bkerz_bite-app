@@ -67,6 +67,10 @@
                         </ul>
                     </li>
                     <li>
+                    <a href="{{route('user.review')}}" class="text-[#7D5751] font-serif hover:underline">Review</a>
+                    </li>
+
+                    <li>
                         <a href="{{route('status')}}" class="text-[#7D5751] font-serif hover:underline">Status</a>
                     </li>
                     <li class="flex items-center">
