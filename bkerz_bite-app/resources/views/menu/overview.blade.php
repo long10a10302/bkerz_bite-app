@@ -39,7 +39,7 @@
                     @foreach ($categories as $category)
                         <div class="pageBucket shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                             <div class="pageBucketImage">
-                                <a href="{{ route('categorydetail', $category->category_name) }}">
+                                <a href="{{ route('categorydetail', $category->category_id) }}">
                                     <img src="{{ asset('images/' . $category->img_url) }}" class="w-full h-48 object-cover">
                                 </a>
                             </div>

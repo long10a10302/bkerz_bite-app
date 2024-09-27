@@ -146,15 +146,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bkerz_bite.migrations: ~8 rows (approximately)
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '0001_01_01_000000_create_users_table', 1),
-	(2, '0001_01_01_000001_create_cache_table', 1),
-	(3, '0001_01_01_000002_create_jobs_table', 1),
-	(4, '2024_08_24_094701_create_categories_table', 1),
-	(5, '2024_08_24_155838_create_products_table', 1),
-	(6, '2024_08_24_160335_create_orders_table', 1),
-	(7, '2024_08_24_160422_create_order_details_table', 1),
-	(8, '2024_08_24_160436_create_reviews_table', 1);
+
 
 -- Dumping structure for table bkerz_bite.orders
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -171,9 +163,6 @@ CREATE TABLE IF NOT EXISTS `orders` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bkerz_bite.orders: ~1 rows (approximately)
-INSERT INTO `orders` (`id`, `user_id`, `order_date`, `status`, `shipping_address`, `created_at`, `updated_at`) VALUES
-	(1, 6, '2024-09-23 12:38:18', 'Đã hủy', 'Hà Nội', '2024-09-23 05:38:18', '2024-09-23 06:08:43'),
-	(2, 6, '2024-09-23 12:39:44', 'Đang xử lý', 'Hà Nội', '2024-09-23 05:39:44', '2024-09-23 05:39:44');
 
 -- Dumping structure for table bkerz_bite.order_details
 CREATE TABLE IF NOT EXISTS `order_details` (
@@ -192,13 +181,6 @@ CREATE TABLE IF NOT EXISTS `order_details` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bkerz_bite.order_details: ~0 rows (approximately)
-INSERT INTO `order_details` (`order_item_id`, `order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-	(1, 2, 1, 1, 45.00, '2024-09-23 05:39:44', '2024-09-23 05:39:44'),
-	(2, 2, 2, 1, 3.75, '2024-09-23 05:39:44', '2024-09-23 05:39:44'),
-	(3, 2, 3, 1, 2.50, '2024-09-23 05:39:44', '2024-09-23 05:39:44'),
-	(4, 2, 4, 1, 25.00, '2024-09-23 05:39:44', '2024-09-23 05:39:44'),
-	(5, 2, 5, 1, 4.00, '2024-09-23 05:39:44', '2024-09-23 05:39:44'),
-	(6, 2, 6, 1, 18.00, '2024-09-23 05:39:44', '2024-09-23 05:39:44');
 
 -- Dumping structure for table bkerz_bite.products
 CREATE TABLE IF NOT EXISTS `products` (
@@ -216,13 +198,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bkerz_bite.products: ~6 rows (approximately)
-INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `category_id`, `image_url`, `created_at`, `updated_at`) VALUES
-	(1, 'Opera Cake', 'A classic French cake made with layers of almond sponge, coffee buttercream, and chocolate ganache.delicious', 45.00, 1, 'https://bakerynouveau.com/images/opera_cake.jpg', '2024-09-01 05:00:00', '2024-09-05 20:22:04'),
-	(2, 'Croissant', 'A flaky, buttery croissant made fresh every morning.', 3.75, 2, 'https://bakerynouveau.com/images/croissant.jpg', '2024-09-01 05:00:00', '2024-09-01 05:00:00'),
-	(3, 'Chocolate Chip Cookie', 'A classic chocolate chip cookie with rich chocolate chunks and a soft, chewy center.', 2.50, 3, 'https://bakerynouveau.com/images/chocolate_chip_cookie.jpg', '2024-09-01 05:00:00', '2024-09-01 05:00:00'),
-	(4, 'Apple Pie', 'Traditional apple pie with a golden crust and spiced apple filling.', 25.00, 4, 'https://bakerynouveau.com/images/apple_pie.jpg', '2024-09-01 05:00:00', '2024-09-01 05:00:00'),
-	(5, 'French Baguette', 'A classic French baguette with a crisp crust and tender crumb.', 4.00, 5, 'https://bakerynouveau.com/images/french_baguette.jpg', '2024-09-01 05:00:00', '2024-09-01 05:00:00'),
-	(6, 'Assorted Chocolates', 'A selection of handcrafted chocolates with a variety of fillings.', 18.00, 6, 'https://bakerynouveau.com/images/assorted_chocolates.jpg', '2024-09-01 05:00:00', '2024-09-01 05:00:00');
+
 
 -- Dumping structure for table bkerz_bite.reviews
 CREATE TABLE IF NOT EXISTS `reviews` (
@@ -258,13 +234,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table bkerz_bite.users: ~4 rows (approximately)
-INSERT INTO `users` (`id`, `full_name`, `email`, `role`, `email_verified_at`, `password`, `phone_number`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(2, 'Nguyễn Đình Hưng', 'hungakb4@gmail.com', 'admin', NULL, '$2y$12$YH2QX4c8n.CGFJMf3Kg1CuDGdIDZlb4vEmVYIzgFUPWvBJbtOtOxO', '0321234567', NULL, '2024-09-09 05:44:56', '2024-09-09 05:44:56'),
-	(3, 'Hưng', 'hungakb9@gmail.com', 'admin', NULL, '$2y$12$iD3b9GqsvMQuAz0wH0G6AubXUYVoI5g7vzEea.iMWepnwbZwtE.CK', '0321234567', NULL, '2024-09-12 00:42:33', '2024-09-12 00:42:33'),
-	(4, 'sad', 'dothivan19121980@gmail.com', 'user', NULL, '$2y$12$p1aZfs4T.NIhip/P6x4zHe.gv8bhkqJQNeBc560Cg2s5p.fqj8Gs2', '0321234567', NULL, '2024-09-15 03:24:43', '2024-09-15 03:24:43'),
-	(5, 'Nguyễn Việt Long', 'long10a10302@gmail.com', 'user', NULL, '$2y$12$AnPO2D//CXzZrKdNnDFY0OxwxuTLRewoSpjZAFheubkTRc4OwNqSC', '0338095474', NULL, '2024-09-18 06:36:36', '2024-09-18 06:36:36'),
-	(6, 'Nguyễn Gia Khánh', 'long10a11999@gmail.com', 'user', NULL, '$2y$12$ltPybGrKknccW7fa0yjfEe5uU4aA3N8dEZfolGdLIPddKe9j5I1KK', '0976581575', NULL, '2024-09-20 09:50:37', '2024-09-20 09:50:37'),
-	(7, 'Admin', 'admin123456@gmail.com', 'admin', NULL, '$2y$12$wn51aoEVZByiD2HTfUxDfOK9vLJqRZ6pcMj7ByZ3k8OKwgDsABmem', '0389724412', NULL, '2024-09-23 02:27:58', '2024-09-23 02:27:58');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

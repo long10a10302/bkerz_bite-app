@@ -26,19 +26,26 @@
             <!-- Gallery Slider -->
             <div class="flex flex-wrap justify-start gap-4">
                 @foreach ($products as $product)
-                    <div class="flex-shrink-0 w-28 lg:w-32 xl:w-36">
-                        <a href="#">
-                            <img 
-                                src="{{  asset('images/' . $product->image_url) }}" 
-                                alt="{{ $product->name }}" 
-                                class="w-full h-32 object-cover rounded-md shadow-md"
-                            >
-                        </a>
-                    </div>
-                @endforeach
+    <div class="flex-shrink-0 w-28 lg:w-32 xl:w-36">
+        <!-- Make the image clickable by wrapping it in an <a> tag -->
+        <a href="{{ route('products.show', $product->product_id) }}">
+            <img 
+                src="{{ asset('images/' . $product->image_url) }}" 
+                alt="{{ $product->name }}" 
+                class="w-full h-32 object-cover rounded-md shadow-md"
+            >
+        </a>
 
-            </div>
-            @endforeach
+        <!-- Add the product name below the image and make it clickable -->
+        <div class="mt-2 text-center">
+            <a href="{{ route('products.show', $product->product_id) }}" class="text-sm font-medium text-blue-600 hover:underline">
+                {{ $product->name }}
+            </a>
+        </div>
+    </div>
+@endforeach
+
+
         </div>
     </section>
 

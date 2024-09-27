@@ -84,7 +84,7 @@
         <ul class="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($relatedProducts as $relatedProduct)
                 <li class="product type-product mb-6 overflow-hidden">
-                    <a href="{{ route('products.show', $relatedProduct->name) }}" 
+                    <a href="{{ route('products.show', $relatedProduct->product_id) }}" 
                        class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                        
                         <!-- Product Image -->

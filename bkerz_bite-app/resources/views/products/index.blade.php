@@ -40,7 +40,7 @@
         @foreach ($products as $product)
         <!-- Product Loop Starts Here -->
         <li class="product bg-white shadow-none overflow-hidden text-left">
-            <a href="{{ route('products.show', $product->name) }}" class="block">
+            <a href="{{ route('products.show', $product->product_id) }}" class="block">
                 <img src="{{ asset('images/' . $product->image_url) }}" 
                      alt="{{ $product->name }}" 
                      class="w-full h-64 object-cover"

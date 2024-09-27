@@ -57,7 +57,7 @@ Route::middleware(['admin'])->group(function () {
 
 Route::get('/{category_id}', [CategoryController::class, 'showCookiesMacarons'])->name("categorydetail");
 Route::get('/{category_name}/products', [CategoryController::class, 'getProductsByCategory'])->name('products.index');
-Route::get('/product/{name}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{product_id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/category/overview', [CategoryController::class, 'overview'])->name('overview');
 
 
