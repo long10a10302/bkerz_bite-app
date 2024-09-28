@@ -3,6 +3,7 @@
 @section('title')
     {{ $product->name }}
 @endsection
+
 @section('content')
 <section class="relative text-center">
     <img class="w-full h-80 object-cover" src="https://bakerynouveau.com/wp-content/uploads/2016/02/pastries_hm.jpg" alt="Overhead view of variety pastry">
@@ -23,12 +24,19 @@
         If you would like to coordinate a larger special order, please call any one of the shops to inquire about availability.
     </p>
 </div>
-<!-- resources/views/products/show.blade.php -->
+
+<!-- Hiển thị thông báo thêm vào giỏ hàng thành công -->
+@if(session('success'))
+    <div class="bg-green-500 text-white px-4 py-2 rounded my-4">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="oneColContent flex flex-wrap mx-auto py-8 max-w-6xl">
     <div class="woocommerce-notices-wrapper mb-4 w-full"></div>
 
     <!-- Product Image Section -->
-    <div class="w-full md:w-1/2 lg:w-1/2 mb-6 md:mb-0"> <!-- Adjust the container width if needed -->
+    <div class="w-full md:w-1/2 lg:w-1/2 mb-6 md:mb-0">
         <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images images" data-columns="4" style="opacity: 1;">
             <div class="woocommerce-product-gallery__wrapper">
                 <div class="woocommerce-product-gallery__image">
@@ -45,79 +53,29 @@
             </div>
         </div>
     </div>
-    
-    
-    
 
     <!-- Product Summary Section -->
     <div class="w-full md:w-1/2 lg:w-1/2" style="color: rgb(148, 83, 5);">
-        <!-- Product Title -->
         <h1 class="product_title entry-title text-3xl font-bold mb-4">{{ $product->name }}</h1>
-
-        <!-- Product Price -->
         <p class="price text-2xl text-gray-800 mb-4">
-            ${{$product->price}}
+            ${{ $product->price }}
         </p>
 
-        <!-- Product Description -->
         <div class="woocommerce-product-details__short-description text-gray-700 mb-4">
             <p>{{ $product->description }}</p>
         </div>
 
-        <!-- Product Form -->
-        <form action="{{ route('cart.add', $product->product_id) }}" class="variations_form cart mb-4" method="get" enctype="multipart/form-data" data-product_id="{{ $product->id }}">
-            <!-- Quantity and Add to Cart Button -->
+        <!-- Add to Cart Form -->
+        <form action="{{ route('cart.add', $product->product_id) }}" method="get" class="variations_form cart mb-4">
             <div class="single_variation_wrap">
                 <div class="woocommerce-variation-add-to-cart variations_button mb-4">
-                    
-                    <button type="submit" 
-                    style="background-color: rgb(110, 84, 60);"
-                    class="single_add_to_cart_button button alt text-white bg-brown-700 py-2 px-4 rounded hover:bg-brown-800 transition duration-300 flex-shrink-0">ADD TO CART</button>
-        
-
+                    <button type="submit" style="background-color: rgb(110, 84, 60);" 
+                    class="single_add_to_cart_button button alt text-white bg-brown-700 py-2 px-4 rounded hover:bg-brown-800 transition duration-300 flex-shrink-0">
+                        ADD TO CART
+                    </button>
                 </div>
             </div>
         </form>
     </div>
-    <section class="related products mt-10 w-full ">
-        <h2 class="text-2xl font-semibold mb-6">Related Products</h2>
-        <ul class="products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach ($relatedProducts as $relatedProduct)
-                <li class="product type-product mb-6 overflow-hidden">
-                    <a href="{{ route('products.show', $relatedProduct->product_id) }}" 
-                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                       
-                        <!-- Product Image -->
-                        <img width="300" height="300" src="{{ asset('images/' . $relatedProduct->image_url) }}" 
-                             class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail object-cover w-full h-48 mb-4" 
-                             alt="{{ $relatedProduct->name }}" />
-                             
-                        <!-- Product Name -->
-                        <h2 class="woocommerce-loop-product__title text-lg font-semibold text-gray-900">{{ $relatedProduct->name }}</h2>
-                        
-                        <!-- Product Price -->
-                        <span class="price block mt-2">
-                            <span class="woocommerce-Price-amount amount">
-                                <p class="price text-xl text-gray-700 mb-2">
-                                    ${{$relatedProduct->price}}
-                                </p>
-                            </span>
-                        </span>
-                    </a>
-                    
-                    <!-- Select Options Button -->
-                    <a href="{{ route('products.show', $relatedProduct->name) }}" 
-                       class="block text-center text-white rounded py-3 mt-4 hover:bg-opacity-90 transition duration-300" 
-                        style="background-color: rgb(110, 84, 60);"
-                       rel="nofollow">
-                       Select Options
-                    </a>
-                </li>
-            @endforeach
-        </ul>
-    </section>
-           
 </div>
-
 @endsection
-

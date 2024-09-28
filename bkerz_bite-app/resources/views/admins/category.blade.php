@@ -4,16 +4,24 @@
 
 @section('content')
 @auth
-<div class="flex">
+<div class="flex flex-col items-center">
     <!-- Main Content Area -->
-    <div class="flex-1 p-6 overflow-y-auto max-h-screen">
+    <div class="flex-1 p-6 overflow-y-auto max-h-screen w-full max-w-5xl">
         <header class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold">List Category</h1>
             <p class="text-lg">Hello, {{ Auth::user()->full_name }}</p>
         </header>
 
+        <!-- Success Message -->
+        @if (session('success'))
+            <div class="flex items-center justify-between bg-green-500 text-white px-4 py-2 rounded mb-4 w-full max-w-lg">
+                <span>{{ session('success') }}</span>
+                <button onclick="this.parentElement.style.display='none';" class="text-white font-bold">×</button>
+            </div>
+        @endif
+
         <!-- Insert Button -->
-        <div class="mb-6">
+        <div class="mb-6 text-right">
             <a href="{{ route('admin.category.add') }}" class="text-blue-500 hover:text-blue-700">Thêm</a>
         </div>
 

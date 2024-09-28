@@ -12,6 +12,12 @@
             <p class="text-lg">Hello, {{ Auth::user()->full_name }}</p>
         </header>
 
+        <!-- Success Message -->
+        @if (session('success'))
+            <div class="bg-green-500 text-white px-4 py-2 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <!-- Category Table -->
         <div class="overflow-x-auto">
@@ -27,9 +33,9 @@
                 <tbody>
                     @foreach ($orders as $order)
                     <tr class="border-b">
-                        <td class="py-2 px-4">{{ $order->id}}</td>
-                        <td class="py-2 px-4">{{ $order->user->email}}</td>
-                        <td class="py-2 px-4">{{ $order->shipping_address}}</td>
+                        <td class="py-2 px-4">{{ $order->id }}</td>
+                        <td class="py-2 px-4">{{ $order->user->email }}</td>
+                        <td class="py-2 px-4">{{ $order->shipping_address }}</td>
                         <td class="py-2 px-4 overflow-hidden">
                             <form action="{{ route('admin.order.updateOrder', $order->id) }}" method="POST" id="order-status-form">
                                 @csrf
@@ -48,9 +54,7 @@
                                 </select>
                                 <button type="submit" class="ml-2 bg-blue-500 text-white rounded p-1">Cập nhật</button>
                             </form>
-
                         </td>
-
                     </tr>
                     @endforeach
                 </tbody>

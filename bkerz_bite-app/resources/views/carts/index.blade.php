@@ -6,8 +6,15 @@
 <div class="container mx-auto p-6">
     <h1 class="text-2xl font-bold mb-4">Your Cart</h1>
 
+    <!-- Hiển thị thông báo thành công nếu có -->
+    @if (session('success'))
+        <div class="bg-green-500 text-white px-4 py-2 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
     @if(isset($message))
-    <p class="text-red-500">{{ $message }}</p>
+        <p class="text-red-500">{{ $message }}</p>
     @else
     <table class="min-w-full border border-gray-300">
         <thead>
@@ -35,12 +42,10 @@
 
                         <!-- Nút tăng số lượng -->
                         <button type="button" class="increase px-2 py-1 bg-gray-300 rounded-r" data-id="{{ $item->id }}">
-                                +
-                            </button>
-                        </div>
-                    </td>
-
-
+                            +
+                        </button>
+                    </div>
+                </td>
                 <td class="py-2 px-4 border-b">${{ number_format($item->product->price, 2) }}</td>
                 <td class="py-2 px-4 border-b">${{ number_format($item->product->price * $item->quantity, 2) }}</td>
                 <td class="py-2 px-4 border-b">

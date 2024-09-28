@@ -11,6 +11,13 @@
     <h2 class="absolute top-1/2 w-full text-white font-semibold text-3xl">MENU</h2>
 </section>
 
+<!-- Thông báo khi thêm sản phẩm vào giỏ hàng thành công -->
+@if(session('success'))
+    <div class="bg-green-500 text-white px-4 py-2 rounded my-4 max-w-6xl mx-auto">
+        {{ session('success') }}
+    </div>
+@endif
+
 <!-- Store Notice Section -->
 <div class="text-left py-4 px-4 border-2 mt-6 mx-auto w-full max-w-6xl" style="border-color: rgb(148, 83, 5);">
     <p class="text-base mb-1" style="color: rgb(148, 83, 5);">

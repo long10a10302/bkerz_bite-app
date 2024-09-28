@@ -16,7 +16,12 @@
         <div class="mb-6">
             <a href="{{ route('admin.cake.add') }}" class="text-blue-500 hover:text-blue-700">Thêm</a>
         </div>
-
+        @if (session('success'))
+            <div class="flex items-center justify-between bg-green-500 text-white px-4 py-2 rounded mb-4 w-full max-w-lg">
+                <span>{{ session('success') }}</span>
+                <button onclick="this.parentElement.style.display='none';" class="text-white font-bold">×</button>
+            </div>
+        @endif
         <!-- Category Table -->
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white rounded-lg shadow">

@@ -63,7 +63,7 @@ class CartController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'Sản phẩm đã được thêm vào giỏ hàng']);
+        return redirect()->back()->with('success', 'Add to cart succesfully.');
     }
 
     public function updateQuantity(Request $request, $id)
@@ -75,10 +75,10 @@ class CartController extends Controller
             $cartItem->quantity = $request->quantity;
             $cartItem->save();
 
-            return response()->json(['success' => true, 'quantity' => $cartItem->quantity]);
+            return redirect()->back()->with('success', 'Add to cart succesfully.');
         }
 
-        return response()->json(['success' => false, 'message' => 'Invalid quantity']);
+        return redirect()->back()->with('fail', 'Add to cart failed.');
     }
 
     public function destroyCart($id)

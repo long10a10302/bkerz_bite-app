@@ -121,7 +121,7 @@ class AdminController extends Controller
 
         $category->save();
 
-        return redirect()->route('admin.category')->with('success', 'Post created successfully.');
+        return redirect()->route('admin.category')->with('success', 'Category created successfully.');
     }
 
     public function updateCat(Request $request, $id)
@@ -164,7 +164,7 @@ class AdminController extends Controller
 
         $category->save();
 
-        return redirect()->route('admin.category')->with('success', 'Post created successfully.');
+        return redirect()->route('admin.category')->with('success', 'Category udpated successfully.');
     }
 
     public function destroyCat($id)
@@ -316,7 +316,7 @@ class AdminController extends Controller
             unlink($imagePath);
         }
         $cake->delete();
-        return redirect()->route('admin.cake')->with('success', 'Cake added successfully.');
+        return redirect()->route('admin.cake')->with('success', 'Cake destroyed successfully.');
     }
     //----------------------------------------------------------------------------------------------------------
     public function review()

@@ -33,21 +33,23 @@ class OrderController extends Controller
 
     public function createOrder(Request $request)
     {
+        // Validate the request
         $request->validate([
             'address' => 'required|string',
             'orderDetails' => 'required|array',
         ]);
-
+    
+        // Check if the user is authenticated
         if (Auth::check()) {
             $userId = Auth::id();
-
+    
             // Create a new order
             $order = Order::create([
                 'user_id' => $userId,
                 'shipping_address' => $request->input('address'),
                 'status' => 'Đang xử lý',
             ]);
-
+    
             // Create order details
             foreach ($request->input('orderDetails') as $detail) {
                 OrderDetail::create([
@@ -57,15 +59,18 @@ class OrderController extends Controller
                     'price' => $detail['price'],
                 ]);
             }
-
+    
             // Clear the cart after successful order creation
+          
             $this->clearCart($userId);
-
-            return response()->json(['message' => 'Order created successfully with a delivery date.']);
+            
+            return redirect()->route('cart')->with('success', 'Order created successfully.');
+        } else {
+            // If the user is not authenticated, redirect back with an error message
+            return redirect()->route('cart')->with('error', 'User not authenticated.');
         }
-
-        return response()->json(['message' => 'User not authenticated.'], 401);
     }
+    
 
     public function updateOrder(Request $request, $id)
     {
